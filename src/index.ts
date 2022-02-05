@@ -1,19 +1,16 @@
-import { NumberCollection } from './NumberCollection';
-import { CharacterCollection } from './CharacterCollection';
-import { LinkedList } from './LinkedList';
+import { FootballReader } from './interface-refactor/FootballReader';
+import { Summary } from './composition/Summary';
 
-const numberCollection = new NumberCollection([10, 3, -5, 0]);
-numberCollection.sort();
-console.log(numberCollection.data);
-
-const characterCollection = new CharacterCollection('Xaayb');
-characterCollection.sort();
-console.log(characterCollection.data);
-
-const linkedList = new LinkedList();
-linkedList.add(500);
-linkedList.add(-10);
-linkedList.add(-3);
-linkedList.add(4);
-linkedList.sort();
-linkedList.print();
+/*
+interface-refactor
+conposition
+*/
+// const csvFileReader = new CSVfileReader('football.csv');
+// const reader = new FootballReader(csvFileReader);
+// reader.load();
+const reader = FootballReader.fromCSV('football.csv');
+reader.load();
+// const summary = new Summary(new WinAnalysis('Man United'), new HtmlReport());
+// need to create analsis obj and report obj when creating summary obj instead of doing that
+const summary = Summary.winAnalysisWithHtmlReport('Man United');
+summary.buildAndPrintReport(reader.data);

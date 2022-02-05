@@ -1,0 +1,21 @@
+import { FootballReader } from './interface-refactor/FootballReader';
+import { CSVfileReader } from './interface-refactor/CSVfileReader';
+import { MatchResult } from './matchResult';
+
+// import { FootballReader } from './abstract-refactor/FootballReader';
+// const reader = new FootballReader('football.csv');
+// reader.read();
+
+const csvFileReader = new CSVfileReader('football.csv');
+const reader = new FootballReader(csvFileReader);
+reader.load();
+
+let manUnitedWins = 0;
+for (let match of reader.data) {
+  if (match[1] === 'Man United' && match[5] === MatchResult.HomeWin) {
+    manUnitedWins++;
+  } else if (match[2] === 'Man United' && match[5] == MatchResult.AwayWin) {
+    manUnitedWins++;
+  }
+}
+console.log(`man united wins ${manUnitedWins} games`);
